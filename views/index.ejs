@@ -3,9 +3,77 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title><%= message %></title>
+  <link rel="stylesheet" href="/style.css">
+  <title>reservation</title>
 </head>
 <body>
-  <h1><%= message %></h1>
+<div class="container mt-5">
+  <h2>Foglalás</h2>
+
+  <% if (errors && errors.length) { %>
+    <div class="alert alert-danger">
+      <ul>
+        <% errors.forEach(err => { %>
+          <li><%= err %></li>
+        <% }) %>
+      </ul>
+    </div>
+  <% } %>
+
+  <% if (success) { %>
+    <div class="alert alert-success"><%= success %></div>
+  <% } %>
+
+  <form action="/" method="post">
+    <div class="mb-3">
+      <label class="form-label">Név</label>
+      <input
+        type="text"
+        class="form-control"
+        name="name"
+        value="<%= data.name || '' %>"
+        required
+      />
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label">E-mail</label>
+      <input
+        type="email"
+        class="form-control"
+        name="email"
+        value="<%= data.email || '' %>"
+        required
+      />
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label">Dátum és időpont</label>
+      <input
+        type="datetime-local"
+        class="form-control"
+        name="date"
+        value="<%= data.date || '' %>"
+        required
+      />
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label">Vendégek / nézők száma</label>
+      <input
+        type="number"
+        class="form-control"
+        name="guests"
+        min="1"
+        max="10"
+        value="<%= data.guests || '' %>"
+        required
+      />
+    </div>
+
+    <button type="submit" class="btn btn-primary">Foglalás mentése</button>
+  </form>
+</div>
+
 </body>
 </html>
